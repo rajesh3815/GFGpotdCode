@@ -1,0 +1,37 @@
+class custom_ds implements Comparable<custom_ds>{
+    int s;int e;int x;
+    custom_ds(int s,int e,int x){
+        this.s=s;
+        this.e=e;
+        this.x=x;
+    }
+    public int compareTo(custom_ds p){
+        return(this.e-p.e);
+    }
+}
+class Solution {
+    
+    public static ArrayList<Integer> maxMeetings(int n, int[] s, int[] f) {
+        custom_ds arr[]=new custom_ds[n];
+        for(int i=0;i<n;i++){
+            arr[i]=new custom_ds(s[i],f[i],i+1);
+        }
+        
+        Arrays.sort(arr);
+        // for(int i=0;i<n;i++){
+        //     System.out.println(arr[i].s+" "+arr[i].e+" "+arr[i].x);
+        // }
+       ArrayList<Integer> ans=new ArrayList<Integer>();
+       ans.add(arr[0].x);
+       int time=arr[0].e;
+       for(int i=1;i<n;i++){
+           if(arr[i].s>time){
+               ans.add(arr[i].x);
+               time=arr[i].e;
+           }
+       }
+       Collections.sort(ans);
+       return ans;
+    }
+}
+        
